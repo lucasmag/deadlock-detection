@@ -1,0 +1,489 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: rgba(0,0,0,0);" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="deadlockdetection.MenuController">
+   <children>
+      <AnchorPane fx:id="menu" layoutY="-66.0" opacity="0.0">
+         <children>
+            <ImageView fx:id="background" fitHeight="662.0" fitWidth="1200.0" layoutY="104.0" pickOnBounds="true">
+               <image>
+                  <Image url="@imagens/background.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="150.0" fitWidth="300.0" layoutX="67.0" layoutY="144.0" opacity="0.85" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@imagens/logo-2.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="addResourcePressed" fitHeight="184.0" fitWidth="538.0" layoutX="331.0" layoutY="384.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@imagens/add-resource-pressed.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="addResource" fitHeight="134.0" fitWidth="538.0" layoutX="331.0" layoutY="383.0" onMouseEntered="#addResourceIn" onMouseExited="#addResourceOut" onMousePressed="#addResourcePress" onMouseReleased="#addResourceRelease" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@imagens/add-resource.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="start" fitHeight="112.0" fitWidth="117.0" layoutX="544.0" layoutY="570.0" onMouseClicked="#startClick" onMouseEntered="#startIn" onMouseExited="#startOut" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@imagens/play-button.png" />
+               </image>
+            </ImageView>
+            <Pane fx:id="resourcePane" layoutX="275.0" layoutY="181.0" onMouseClicked="#resourcePaneClick" pickOnBounds="true" prefHeight="550.0" prefWidth="650.0" visible="false">
+               <children>
+                  <ImageView fitHeight="550.0" fitWidth="648.0" layoutX="4.0" layoutY="1.0" pickOnBounds="true">
+                     <image>
+                        <Image url="@imagens/teste.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="540.0" fitWidth="276.0" layoutX="376.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@imagens/bg-ref-add.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="selected" fitHeight="54.0" fitWidth="255.0" layoutX="15.0" layoutY="11.0" pickOnBounds="true" visible="false">
+                     <image>
+                        <Image url="@imagens/selected.png" />
+                     </image>
+                  </ImageView>
+                  <Pane fx:id="pane0" layoutX="17.0" layoutY="13.0" onMouseClicked="#pane0Click" onMouseEntered="#pane0In" onMouseExited="#pane0Out" prefHeight="50.0" prefWidth="250.0">
+                     <children>
+                        <ImageView fitHeight="50.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@imagens/item-predef.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView disable="true" fitHeight="50.0" fitWidth="47.0" layoutX="1.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@imagens/hd.png" />
+                           </image>
+                        </ImageView>
+                        <Label fx:id="name0" layoutX="65.0" layoutY="14.0" text="HD" textFill="#252525">
+                           <font>
+                              <Font name="Century Gothic Bold Italic" size="18.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="38.0" fitWidth="72.0" layoutX="192.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@imagens/id-back.png" />
+                           </image>
+                        </ImageView>
+                        <Label layoutX="199.0" layoutY="14.0" text="ID: 0" textFill="#616161">
+                           <font>
+                              <Font name="Century Gothic Bold" size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+                  <Pane fx:id="pane1" layoutX="17.0" layoutY="66.0" onMouseClicked="#pane1Click" onMouseEntered="#pane1In" onMouseExited="#pane1Our" prefHeight="50.0" prefWidth="250.0">
+                     <children>
+                        <ImageView fitHeight="50.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@imagens/item-predef.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="50.0" fitWidth="47.0" layoutX="1.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@imagens/headset.png" />
+                           </image>
+                        </ImageView>
+                        <Label fx:id="name1" layoutX="65.0" layoutY="14.0" text="Fone" textFill="#252525">
+                           <font>
+                              <Font name="Century Gothic Bold Italic" size="18.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="38.0" fitWidth="72.0" layoutX="191.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@imagens/id-back.png" />
+                           </image>
+                        </ImageView>
+                        <Label layoutX="200.0" layoutY="14.0" text="ID: 1" textFill="#616161">
+                           <font>
+                              <Font name="Century Gothic Bold" size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+                  <Pane fx:id="pane2" layoutX="17.0" layoutY="119.0" onMouseClicked="#pane2Click" onMouseEntered="#pane2In" onMouseExited="#pane2Out" prefHeight="50.0" prefWidth="250.0">
+                     <children>
+                        <ImageView fitHeight="50.0" fitWidth="250.0" layoutX="1.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@imagens/item-predef.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="50.0" fitWidth="47.0" layoutX="1.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@imagens/joystick.png" />
+                           </image>
+                        </ImageView>
+                        <Label fx:id="name2" layoutX="65.0" layoutY="14.0" text="Controle" textFill="#252525">
+                           <font>
+                              <Font name="Century Gothic Bold Italic" size="18.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="38.0" fitWidth="72.0" layoutX="192.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@imagens/id-back.png" />
+                           </image>
+                        </ImageView>
+                        <Label layoutX="199.0" layoutY="14.0" text="ID: 2" textFill="#616161">
+                           <font>
+                              <Font name="Century Gothic Bold" size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+                  <Pane fx:id="pane3" layoutX="17.0" layoutY="172.0" onMouseClicked="#pane3Click" onMouseEntered="#pane3In" onMouseExited="#pane3Out" prefHeight="50.0" prefWidth="250.0">
+                     <children>
+                        <ImageView fitHeight="50.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@imagens/item-predef.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="50.0" fitWidth="47.0" layoutX="1.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@imagens/mouse.png" />
+                           </image>
+                        </ImageView>
+                        <Label fx:id="name3" layoutX="67.0" layoutY="14.0" text="Mouse" textFill="#252525">
+                           <font>
+                              <Font name="Century Gothic Bold Italic" size="18.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="38.0" fitWidth="72.0" layoutX="192.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@imagens/id-back.png" />
+                           </image>
+                        </ImageView>
+                        <Label layoutX="199.0" layoutY="14.0" text="ID: 3" textFill="#616161">
+                           <font>
+                              <Font name="Century Gothic Bold" size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+                  <Pane fx:id="pane4" layoutX="17.0" layoutY="225.0" onMouseClicked="#pane4Click" onMouseEntered="#pane4In" onMouseExited="#pane4Out" prefHeight="50.0" prefWidth="250.0">
+                     <children>
+                        <ImageView fitHeight="50.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@imagens/item-predef.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="50.0" fitWidth="47.0" layoutX="1.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@imagens/webcam.png" />
+                           </image>
+                        </ImageView>
+                        <Label fx:id="name4" layoutX="67.0" layoutY="14.0" text="Webcam" textFill="#252525">
+                           <font>
+                              <Font name="Century Gothic Bold Italic" size="18.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="38.0" fitWidth="72.0" layoutX="192.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@imagens/id-back.png" />
+                           </image>
+                        </ImageView>
+                        <Label layoutX="199.0" layoutY="14.0" text="ID: 4" textFill="#616161">
+                           <font>
+                              <Font name="Century Gothic Bold" size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+                  <Pane fx:id="pane5" layoutX="17.0" layoutY="278.0" onMouseClicked="#pane5Click" onMouseEntered="#pane5In" onMouseExited="#pane5Out" prefHeight="50.0" prefWidth="250.0">
+                     <children>
+                        <ImageView fitHeight="50.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@imagens/item-predef.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="50.0" fitWidth="47.0" layoutX="1.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@imagens/floppy.png" />
+                           </image>
+                        </ImageView>
+                        <Label fx:id="name5" layoutX="69.0" layoutY="14.0" text="Disquete" textFill="#252525">
+                           <font>
+                              <Font name="Century Gothic Bold Italic" size="18.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="38.0" fitWidth="72.0" layoutX="192.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@imagens/id-back.png" />
+                           </image>
+                        </ImageView>
+                        <Label layoutX="199.0" layoutY="14.0" text="ID: 5" textFill="#616161">
+                           <font>
+                              <Font name="Century Gothic Bold" size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+                  <Pane fx:id="pane6" layoutX="17.0" layoutY="331.0" onMouseClicked="#pane6Click" onMouseEntered="#pane6In" onMouseExited="#pane6Out" prefHeight="50.0" prefWidth="250.0">
+                     <children>
+                        <ImageView fitHeight="50.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@imagens/item-predef.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="50.0" fitWidth="47.0" layoutX="1.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@imagens/cpu.png" />
+                           </image>
+                        </ImageView>
+                        <Label fx:id="name6" layoutX="65.0" layoutY="14.0" text="Cpu" textFill="#252525">
+                           <font>
+                              <Font name="Century Gothic Bold Italic" size="18.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="38.0" fitWidth="72.0" layoutX="192.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@imagens/id-back.png" />
+                           </image>
+                        </ImageView>
+                        <Label layoutX="199.0" layoutY="14.0" text="ID: 6" textFill="#616161">
+                           <font>
+                              <Font name="Century Gothic Bold" size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+                  <Pane fx:id="pane7" layoutX="17.0" layoutY="384.0" onMouseClicked="#pane7Click" onMouseEntered="#pane7In" onMouseExited="#pane7Out" prefHeight="50.0" prefWidth="250.0">
+                     <children>
+                        <ImageView fitHeight="50.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@imagens/item-predef.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="50.0" fitWidth="47.0" layoutX="1.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@imagens/scanner.png" />
+                           </image>
+                        </ImageView>
+                        <Label fx:id="name7" layoutX="67.0" layoutY="14.0" text="Scanner" textFill="#252525">
+                           <font>
+                              <Font name="Century Gothic Bold Italic" size="18.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="38.0" fitWidth="72.0" layoutX="192.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@imagens/id-back.png" />
+                           </image>
+                        </ImageView>
+                        <Label layoutX="199.0" layoutY="14.0" text="ID: 7" textFill="#616161">
+                           <font>
+                              <Font name="Century Gothic Bold" size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+                  <Pane fx:id="pane8" layoutX="17.0" layoutY="437.0" onMouseClicked="#pane8Click" onMouseEntered="#pane8In" onMouseExited="#pane8Out" prefHeight="50.0" prefWidth="250.0">
+                     <children>
+                        <ImageView fitHeight="50.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@imagens/item-predef.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="50.0" fitWidth="47.0" layoutX="1.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@imagens/printer.png" />
+                           </image>
+                        </ImageView>
+                        <Label fx:id="name8" layoutX="65.0" layoutY="14.0" text="Impressora" textFill="#252525">
+                           <font>
+                              <Font name="Century Gothic Bold Italic" size="18.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="38.0" fitWidth="72.0" layoutX="192.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@imagens/id-back.png" />
+                           </image>
+                        </ImageView>
+                        <Label layoutX="199.0" layoutY="14.0" text="ID: 8" textFill="#616161">
+                           <font>
+                              <Font name="Century Gothic Bold" size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+                  <Pane fx:id="pane9" layoutX="17.0" layoutY="490.0" onMouseClicked="#pane9Click" onMouseEntered="#pane9In" onMouseExited="#pane9Out" prefHeight="50.0" prefWidth="250.0">
+                     <children>
+                        <ImageView fitHeight="50.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@imagens/item-predef.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="50.0" fitWidth="47.0" layoutX="1.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@imagens/usb.png" />
+                           </image>
+                        </ImageView>
+                        <Label fx:id="name9" layoutX="67.0" layoutY="14.0" text="USB" textFill="#252525">
+                           <font>
+                              <Font name="Century Gothic Bold Italic" size="18.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="38.0" fitWidth="72.0" layoutX="192.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@imagens/id-back.png" />
+                           </image>
+                        </ImageView>
+                        <Label layoutX="199.0" layoutY="14.0" text="ID: 9" textFill="#616161">
+                           <font>
+                              <Font name="Century Gothic Bold" size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+                  <ImageView fx:id="plusDown" fitHeight="70.0" fitWidth="61.0" layoutX="291.0" layoutY="278.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@imagens/plus-down.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="plus" fitHeight="70.0" fitWidth="72.0" layoutX="291.0" layoutY="278.0" onMouseClicked="#plusClick" onMouseEntered="#plusIn" onMouseExited="#plusOut" onMousePressed="#plusPress" onMouseReleased="#plusRelease" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@imagens/plus.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="minusDown" fitHeight="70.0" fitWidth="72.0" layoutX="292.0" layoutY="278.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@imagens/minus-down.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="minus" fitHeight="70.0" fitWidth="84.0" layoutX="292.0" layoutY="278.0" onMouseClicked="#minusClick" onMouseEntered="#minusIn" onMouseExited="#minusOut" onMousePressed="#minusPress" onMouseReleased="#minusRelease" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@imagens/minus.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="done" fitHeight="70.0" fitWidth="88.0" layoutX="286.0" layoutY="505.0" onMouseClicked="#doneClick" onMouseEntered="#doneIn" onMouseExited="#doneOut" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@imagens/done.png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="238.0" layoutY="128.0" rotate="270.0" text="RECURSOS ADICIONADOS" textFill="WHITE">
+                     <font>
+                        <Font name="Century Gothic" size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane fx:id="resourceAmountPane" layoutX="544.0" layoutY="6.0" prefHeight="85.0" prefWidth="112.0">
+               <children>
+                  <ImageView fitHeight="102.0" fitWidth="112.0" layoutY="-6.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@imagens/back-resource-amount.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="resourceAmountLbl" alignment="CENTER" contentDisplay="CENTER" layoutX="27.0" layoutY="23.0" prefHeight="48.0" prefWidth="58.0" text="0" textFill="WHITE">
+                     <font>
+                        <Font name="Century Gothic Bold" size="38.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane fx:id="topPane" layoutY="66.0" prefHeight="38.0" prefWidth="1200.0">
+               <children>
+                  <ImageView fx:id="topBar" fitHeight="38.0" fitWidth="1200.0" onMouseDragged="#moveScreen" onMousePressed="#topBarPress" pickOnBounds="true">
+                     <image>
+                        <Image url="@imagens/topbar.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="minimize" fitHeight="25.0" fitWidth="25.0" layoutX="1137.0" layoutY="7.0" onMouseClicked="#minimizeWindow" onMouseEntered="#minimizeWindowIn" onMouseExited="#minimizeWindowOut" pickOnBounds="true">
+                     <image>
+                        <Image url="@imagens/minimize-window.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="close" fitHeight="25.0" fitWidth="25.0" layoutX="1169.0" layoutY="7.0" onMouseClicked="#closeWindow" onMouseEntered="#closeWindowIn" onMouseExited="#closeWindowOut" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@imagens/close-window.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="28.0" fitWidth="28.0" layoutX="14.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@imagens/dd.png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="46.0" layoutY="9.0" text="Deadlock Detection" textFill="#e1e1e1">
+                     <font>
+                        <Font name="Century Gothic Italic" size="15.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane fx:id="tutorialPane" layoutX="378.0" layoutY="349.0" opacity="0.0" prefWidth="452.0" style="-fx-background-color: rgba(0,0,0,0.9);">
+               <children>
+                  <GridPane layoutX="18.0" layoutY="14.0" prefWidth="406.0">
+                    <columnConstraints>
+                      <ColumnConstraints />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Text fx:id="tutorialTxt" fill="#eeeeee" fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" text="Bem vindo(a) à Deadlock Detection, a ferramenta de detecção de deadlocks!&#10;&#10;Você pode desativar as dicas à qualquer momento clicando no botão verde localizado na parte inferior esquerda da tela." wrappingWidth="360.0" GridPane.columnIndex="1">
+                           <font>
+                              <Font name="Century Gothic" size="16.0" />
+                           </font>
+                           <GridPane.margin>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </GridPane.margin>
+                        </Text>
+                        <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" GridPane.valignment="TOP">
+                           <image>
+                              <Image url="@imagens/info.png" />
+                           </image>
+                           <GridPane.margin>
+                              <Insets bottom="10.0" right="10.0" top="10.0" />
+                           </GridPane.margin>
+                        </ImageView>
+                        <ImageView fx:id="confirmButton" fitHeight="36.0" fitWidth="114.0" onMouseClicked="#confirmButtonClick" onMouseEntered="#confirmButtonEnter" onMouseExited="#confirmButtonExit" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                           <image>
+                              <Image url="@imagens/confirm.png" />
+                           </image>
+                           <GridPane.margin>
+                              <Insets right="10.0" />
+                           </GridPane.margin>
+                        </ImageView>
+                     </children>
+                     <padding>
+                        <Insets bottom="-10.0" />
+                     </padding>
+                  </GridPane>
+               </children>
+               <padding>
+                  <Insets right="20.0" top="20.0" />
+               </padding>
+            </Pane>
+            <ImageView fx:id="skipButton" fitHeight="60.0" fitWidth="60.0" layoutX="14.0" layoutY="690.0" onMouseClicked="#skipTutorial" onMouseEntered="#skipIn" onMouseExited="#skipOut" opacity="0.8" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@imagens/skip.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <Pane fx:id="logo" layoutX="374.0" layoutY="280.0" prefHeight="140.0" prefWidth="452.0">
+         <children>
+            <ImageView fitHeight="214.0" fitWidth="444.0" layoutX="8.0" layoutY="-5.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@imagens/logo-2.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

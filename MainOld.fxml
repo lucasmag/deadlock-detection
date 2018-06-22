@@ -1,0 +1,804 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.ColorAdjust?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.Lighting?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="700.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="deadlockdetection.MainOldController">
+   <children>
+      <ImageView fitHeight="662.0" fitWidth="1200.0" layoutY="38.0" pickOnBounds="true">
+         <image>
+            <Image url="@imagens/maxresdefault.png" />
+         </image>
+         <effect>
+            <ColorAdjust brightness="-0.09" contrast="-0.1" hue="0.05" saturation="-0.1" />
+         </effect>
+      </ImageView>
+      <ImageView fitHeight="52.0" fitWidth="334.0" layoutX="821.0" layoutY="620.0" onMouseEntered="#removeProcessEnter" onMouseExited="#removeProcessExit" onMousePressed="#removeProcessPress" onMouseReleased="#removeProcessRelease" pickOnBounds="true">
+         <image>
+            <Image url="@imagens/remove-process.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="101.0" fitWidth="378.0" layoutX="799.0" layoutY="532.0" onMouseEntered="#newProcessEnter" onMouseExited="#newProcessExit" onMousePressed="#newProcessPress" onMouseReleased="#newProcessRelease" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@imagens/add-process.png" />
+         </image>
+      </ImageView>
+      <Pane fx:id="removePane" layoutX="780.0" layoutY="488.0" prefHeight="206.0" prefWidth="413.0" style="-fx-background-color: rgba(0,0,0,0.9);" visible="false">
+         <children>
+            <TextField fx:id="remove" layoutX="169.0" layoutY="38.0" prefHeight="36.0" prefWidth="76.0" promptText="processo" />
+            <ImageView fx:id="cancelRemove" fitHeight="31.0" fitWidth="83.0" layoutX="165.0" layoutY="152.0" onMouseEntered="#cancelRemoveEnter" onMouseExited="#cancelRemoveExit" onMousePressed="#cancelRemovePress" onMouseReleased="#cancelRemoveRelease" pickOnBounds="true">
+               <image>
+                  <Image url="@imagens/cancel.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="removeButton" fitHeight="44.0" fitWidth="174.0" layoutX="135.0" layoutY="96.0" onMouseEntered="#removeEnter" onMouseExited="#removeExit" onMousePressed="#removePress" onMouseReleased="#removeRelease" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@imagens/remove.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+      <Pane fx:id="newProcessPane" layoutX="781.0" layoutY="488.0" prefHeight="206.0" prefWidth="413.0" style="-fx-background-color: #eee;" visible="false">
+         <children>
+            <Pane layoutX="4.0" layoutY="5.0" prefHeight="31.0" prefWidth="142.0" style="-fx-background-color: #ddd;">
+               <children>
+                  <Label layoutX="54.0" layoutY="6.0" text="Nome">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane layoutX="151.0" layoutY="5.0" prefHeight="31.0" prefWidth="55.0" style="-fx-background-color: #ddd;">
+               <children>
+                  <Label layoutX="22.0" layoutY="6.0" text="ID">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane layoutX="211.0" layoutY="5.0" prefHeight="31.0" prefWidth="96.0" style="-fx-background-color: #ddd;">
+               <children>
+                  <Label layoutX="10.0" layoutY="6.0" text=" Δ Solicitação">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane layoutX="312.0" layoutY="5.0" prefHeight="31.0" prefWidth="96.0" style="-fx-background-color: #ddd;">
+               <children>
+                  <Label layoutX="13.0" layoutY="6.0" text=" Δ Utilização">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Label fx:id="processAlias" alignment="CENTER" layoutX="4.0" layoutY="49.0" prefHeight="20.0" prefWidth="142.0" text="-">
+               <font>
+                  <Font name="Century Gothic" size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="processId" layoutX="173.0" layoutY="47.0" text="0">
+               <font>
+                  <Font name="Century Gothic Bold" size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="requestField" alignment="CENTER" layoutX="229.0" layoutY="46.0" prefHeight="25.0" prefWidth="60.0" promptText="ΔS" />
+            <TextField fx:id="useField" alignment="CENTER" layoutX="331.0" layoutY="46.0" prefHeight="25.0" prefWidth="60.0" promptText="ΔU" />
+            <ImageView fx:id="addProcessButton" fitHeight="44.0" fitWidth="134.0" layoutX="251.0" layoutY="148.0" onMouseClicked="#addProcessClick" onMouseEntered="#addProcessEnter" onMouseExited="#addProcessExit" onMousePressed="#addProcessPress" onMouseReleased="#addProcessRelease" pickOnBounds="true">
+               <image>
+                  <Image url="@imagens/add.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="cancelAdd" fitHeight="31.0" fitWidth="83.0" layoutX="165.0" layoutY="161.0" onMouseClicked="#cancelProcessClick" onMouseEntered="#cancelProcessEnter" onMouseExited="#cancelProcessExit" pickOnBounds="true">
+               <image>
+                  <Image url="@imagens/cancel.png" />
+               </image>
+            </ImageView>
+            <Pane fx:id="addIcon" layoutX="138.0" layoutY="92.0" onMouseClicked="#addIconClick" onMouseEntered="#addIconEnter" onMouseExited="#addIconExit" prefHeight="38.0" prefWidth="348.0" style="-fx-background-color: rgba(0,0,0,0);">
+               <children>
+                  <ImageView fitHeight="38.0" fitWidth="348.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@imagens/back-add-icon.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="addIconText" layoutX="28.0" layoutY="9.0" text="Clique para adicionar um ícone" textFill="WHITE">
+                     <font>
+                        <Font name="Century Gothic Italic" size="15.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <ImageView fx:id="processIcon" fitHeight="50.0" fitWidth="50.0" layoutX="50.0" layoutY="86.0" pickOnBounds="true" preserveRatio="true" />
+            <Pane fx:id="iconBar" layoutX="5.0" layoutY="87.0" prefHeight="50.0" prefWidth="438.0" style="-fx-background-color: #ddd;" visible="false">
+               <children>
+                  <ImageView fx:id="netbeans" fitHeight="36.0" fitWidth="36.0" layoutX="283.0" layoutY="7.0" onMouseClicked="#selNetbeans" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@imagens/NetBeans.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="spotify" fitHeight="30.0" fitWidth="30.0" layoutX="326.0" layoutY="9.0" onMouseClicked="#selSpotify" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@imagens/spotify.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="word" fitHeight="35.0" fitWidth="35.0" layoutX="362.0" layoutY="7.0" onMouseClicked="#selWord" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@imagens/word.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="steam" fitHeight="31.0" fitWidth="31.0" layoutX="208.0" layoutY="9.0" onMouseClicked="#selSteam" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@imagens/steam.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="utorrent" fitHeight="31.0" fitWidth="31.0" layoutX="247.0" layoutY="9.0" onMouseClicked="#selUtorrent" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@imagens/utorrent.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="chrome" fitHeight="33.0" fitWidth="33.0" layoutX="89.0" layoutY="8.0" onMouseClicked="#selChrome" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@imagens/chrome.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="dropbox" fitHeight="34.0" fitWidth="34.0" layoutX="128.0" layoutY="7.0" onMouseClicked="#selDropbox" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@imagens/dropbox.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="reader" fitHeight="56.0" fitWidth="30.0" layoutX="169.0" layoutY="9.0" onMouseClicked="#selReader" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@imagens/adobe.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="photoshop" fitHeight="34.0" fitWidth="34.0" layoutX="9.0" layoutY="8.0" onMouseClicked="#selPhotoshop" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@imagens/photoshop.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="illustrator" fitHeight="34.0" fitWidth="34.0" layoutX="48.0" layoutY="8.0" onMouseClicked="#selIllustrator" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@imagens/illustrator.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+            <Pane fx:id="infoBar" layoutX="4.0" layoutY="-14.0" onMouseClicked="#pullIcons" prefHeight="54.0" prefWidth="404.0" style="-fx-background-color: #8ccbe2;" visible="false">
+               <children>
+                  <ImageView fx:id="processIcon1" fitHeight="30.0" fitWidth="30.0" layoutX="5.0" layoutY="18.0" onMouseClicked="#processIconClick" onMouseEntered="#processIconEnter" onMouseExited="#processIconExit" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@imagens/info.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="infoText" alignment="CENTER" contentDisplay="CENTER" layoutX="43.0" layoutY="24.0" prefHeight="19.0" prefWidth="348.0" text="info" textAlignment="CENTER">
+                     <font>
+                        <Font name="Century Gothic" size="15.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+         </children>
+      </Pane>
+      <ImageView fitHeight="105.0" fitWidth="440.0" layoutX="760.0" layoutY="386.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@imagens/bug-fix.png" />
+         </image>
+         <effect>
+            <ColorAdjust brightness="-0.09" contrast="-0.1" hue="0.05" saturation="-0.1" />
+         </effect>
+      </ImageView>
+      <TabPane layoutX="781.0" layoutY="44.0" prefHeight="438.0" prefWidth="413.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab closable="false" text="         Log         ">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="413.0">
+                     <children>
+                        <TextArea fx:id="log" editable="false" layoutX="-1.0" layoutY="3.0" prefHeight="408.0" prefWidth="415.0" promptText="Bem vindo(a)! Para começar, adicione um processo!">
+                           <effect>
+                              <Lighting bumpInput="$null" diffuseConstant="1.16" light="$null" specularConstant="0.86" specularExponent="40.0" surfaceScale="0.0" />
+                           </effect></TextArea>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab closable="false" text="      Situação      ">
+            <content>
+                  <Pane prefHeight="200.0" prefWidth="358.0" style="-fx-background-color: rgba(255,255,255,0.3);">
+                     <children>
+                        <ImageView fitHeight="414.0" fitWidth="413.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@imagens/situation.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="situation2" fitHeight="56.0" fitWidth="40.0" layoutX="258.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                           <image>
+                              <Image url="@imagens/adobe.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="situation0" fitHeight="56.0" fitWidth="40.0" layoutX="156.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                           <image>
+                              <Image url="@imagens/adobe.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="situation3" fitHeight="56.0" fitWidth="40.0" layoutX="309.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                           <image>
+                              <Image url="@imagens/adobe.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="situation1" fitHeight="56.0" fitWidth="40.0" layoutX="207.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                           <image>
+                              <Image url="@imagens/adobe.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="situation4" fitHeight="56.0" fitWidth="40.0" layoutX="360.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                           <image>
+                              <Image url="@imagens/adobe.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="situation7" fitHeight="56.0" fitWidth="40.0" layoutX="258.0" layoutY="92.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                           <image>
+                              <Image url="@imagens/adobe.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="situation5" fitHeight="56.0" fitWidth="40.0" layoutX="156.0" layoutY="91.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                           <image>
+                              <Image url="@imagens/adobe.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="situation8" fitHeight="56.0" fitWidth="40.0" layoutX="309.0" layoutY="91.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                           <image>
+                              <Image url="@imagens/adobe.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="situation6" fitHeight="56.0" fitWidth="40.0" layoutX="207.0" layoutY="92.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                           <image>
+                              <Image url="@imagens/adobe.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="situation9" fitHeight="56.0" fitWidth="40.0" layoutX="360.0" layoutY="92.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                           <image>
+                              <Image url="@imagens/adobe.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </Pane>
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+      <Pane fx:id="back" layoutX="5.0" layoutY="44.0" prefHeight="650.0" prefWidth="770.0" style="-fx-background-color: rgba(225,225,225,0.5);">
+         <children>
+            <ImageView fx:id="process0Arrow" fitHeight="2.0" fitWidth="270.0" layoutX="398.0" layoutY="162.0" pickOnBounds="true" visible="false">
+               <image>
+                  <Image url="@imagens/processArrow.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="process1Arrow" fitHeight="2.0" fitWidth="270.0" layoutX="426.0" layoutY="153.0" pickOnBounds="true" visible="false">
+               <image>
+                  <Image url="@imagens/processArrow.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="process2Arrow" fitHeight="2.0" fitWidth="270.0" layoutX="434.0" layoutY="117.0" pickOnBounds="true" visible="false">
+               <image>
+                  <Image url="@imagens/processArrow.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="process3Arrow" fitHeight="2.0" fitWidth="270.0" layoutX="408.0" layoutY="172.0" pickOnBounds="true" visible="false">
+               <image>
+                  <Image url="@imagens/processArrow.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="process4Arrow" fitHeight="2.0" fitWidth="270.0" layoutX="436.0" layoutY="163.0" pickOnBounds="true" visible="false">
+               <image>
+                  <Image url="@imagens/processArrow.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="process5Arrow" fitHeight="2.0" fitWidth="270.0" layoutX="444.0" layoutY="127.0" pickOnBounds="true" visible="false">
+               <image>
+                  <Image url="@imagens/processArrow.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="process6Arrow" fitHeight="2.0" fitWidth="270.0" layoutX="418.0" layoutY="182.0" pickOnBounds="true" visible="false">
+               <image>
+                  <Image url="@imagens/processArrow.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="process7Arrow" fitHeight="2.0" fitWidth="270.0" layoutX="446.0" layoutY="173.0" pickOnBounds="true" visible="false">
+               <image>
+                  <Image url="@imagens/processArrow.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="process8Arrow" fitHeight="2.0" fitWidth="270.0" layoutX="454.0" layoutY="137.0" pickOnBounds="true" visible="false">
+               <image>
+                  <Image url="@imagens/processArrow.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="process9Arrow" fitHeight="2.0" fitWidth="270.0" layoutX="456.0" layoutY="183.0" pickOnBounds="true" visible="false">
+               <image>
+                  <Image url="@imagens/processArrow.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="headsetArrow" fitHeight="2.0" fitWidth="650.0" layoutX="75.0" layoutY="182.0" pickOnBounds="true" visible="false">
+               <image>
+                  <Image url="@imagens/resourceArrow.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="joystickArrow" fitHeight="2.0" fitWidth="650.0" layoutX="85.0" layoutY="192.0" pickOnBounds="true" visible="false">
+               <image>
+                  <Image url="@imagens/resourceArrow.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="webcamArrow" fitHeight="2.0" fitWidth="650.0" layoutX="85.0" layoutY="192.0" pickOnBounds="true" visible="false">
+               <image>
+                  <Image url="@imagens/resourceArrow.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="floppyArrow" fitHeight="2.0" fitWidth="650.0" layoutX="85.0" layoutY="192.0" pickOnBounds="true" visible="false">
+               <image>
+                  <Image url="@imagens/resourceArrow.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="cpuArrow" fitHeight="2.0" fitWidth="650.0" layoutX="85.0" layoutY="192.0" pickOnBounds="true" visible="false">
+               <image>
+                  <Image url="@imagens/resourceArrow.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="scannerArrow" fitHeight="2.0" fitWidth="650.0" layoutX="85.0" layoutY="192.0" pickOnBounds="true" visible="false">
+               <image>
+                  <Image url="@imagens/resourceArrow.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="printerArrow" fitHeight="2.0" fitWidth="650.0" layoutX="95.0" layoutY="202.0" pickOnBounds="true" visible="false">
+               <image>
+                  <Image url="@imagens/resourceArrow.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="pendriveArrow" fitHeight="2.0" fitWidth="650.0" layoutX="105.0" layoutY="212.0" pickOnBounds="true" visible="false">
+               <image>
+                  <Image url="@imagens/resourceArrow.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="hdArrow" fitHeight="2.0" fitWidth="650.0" layoutX="75.0" layoutY="182.0" pickOnBounds="true" visible="false">
+               <image>
+                  <Image url="@imagens/resourceArrow.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="mouseArrow" fitHeight="2.0" fitWidth="650.0" layoutX="65.0" layoutY="172.0" pickOnBounds="true" visible="false">
+               <image>
+                  <Image url="@imagens/resourceArrow.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="p0Back" fitHeight="114.0" fitWidth="83.0" layoutX="112.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@imagens/back-process.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="p1Back" fitHeight="114.0" fitWidth="83.0" layoutX="231.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@imagens/back-process.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="p2Back" fitHeight="114.0" fitWidth="83.0" layoutX="354.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@imagens/back-process.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="p3Back" fitHeight="114.0" fitWidth="83.0" layoutX="463.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@imagens/back-process.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="p4Back" fitHeight="114.0" fitWidth="83.0" layoutX="574.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@imagens/back-process.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="p5Back" fitHeight="114.0" fitWidth="83.0" layoutX="111.0" layoutY="514.0" pickOnBounds="true" preserveRatio="true" rotate="180.0" visible="false">
+               <image>
+                  <Image url="@imagens/back-process.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="p6Back" fitHeight="114.0" fitWidth="83.0" layoutX="227.0" layoutY="525.0" pickOnBounds="true" preserveRatio="true" rotate="180.0" visible="false">
+               <image>
+                  <Image url="@imagens/back-process.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="p7Back" fitHeight="114.0" fitWidth="83.0" layoutX="350.0" layoutY="538.0" pickOnBounds="true" preserveRatio="true" rotate="180.0" visible="false">
+               <image>
+                  <Image url="@imagens/back-process.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="p8Back" fitHeight="114.0" fitWidth="83.0" layoutX="460.0" layoutY="527.0" pickOnBounds="true" preserveRatio="true" rotate="180.0" visible="false">
+               <image>
+                  <Image url="@imagens/back-process.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="p9Back" fitHeight="114.0" fitWidth="83.0" layoutX="566.0" layoutY="509.0" pickOnBounds="true" preserveRatio="true" rotate="180.0" visible="false">
+               <image>
+                  <Image url="@imagens/back-process.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="resource8" fitHeight="50.0" fitWidth="50.0" layoutX="33.0" layoutY="300.0" onMouseEntered="#r8Enter" onMouseExited="#r8Exit" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@imagens/printer.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="resource7" fitHeight="50.0" fitWidth="50.0" layoutX="609.0" layoutY="299.0" onMouseEntered="#r7Enter" onMouseExited="#r7Exit" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@imagens/scanner.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="resource1" fitHeight="50.0" fitWidth="50.0" layoutX="394.0" layoutY="299.0" onMouseEntered="#r1Enter" onMouseExited="#r1Exit" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@imagens/headset.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="resource4" fitHeight="50.0" fitWidth="50.0" layoutX="177.0" layoutY="299.0" onMouseEntered="#r4Enter" onMouseExited="#r4Exit" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@imagens/webcam.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="resource3" fitHeight="50.0" fitWidth="50.0" layoutX="467.0" layoutY="299.0" onMouseEntered="#r3Enter" onMouseExited="#r3Exit" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@imagens/mouse.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="resource6" fitHeight="50.0" fitWidth="50.0" layoutX="107.0" layoutY="299.0" onMouseEntered="#r6Enter" onMouseExited="#r6Exit" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@imagens/cpu.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="resource2" fitHeight="50.0" fitWidth="50.0" layoutX="250.0" layoutY="299.0" onMouseEntered="#r2Enter" onMouseExited="#r2Exit" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@imagens/joystick.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="resource5" fitHeight="50.0" fitWidth="50.0" layoutX="539.0" layoutY="299.0" onMouseEntered="#r5Enter" onMouseExited="#r5Exit" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@imagens/floppy.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="resource0" fitHeight="50.0" fitWidth="50.0" layoutX="321.0" layoutY="299.0" onMouseEntered="#r0Enter" onMouseExited="#r0Exit" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@imagens/hd.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="resource9" fitHeight="50.0" fitWidth="50.0" layoutX="682.0" layoutY="299.0" onMouseEntered="#r9Enter" onMouseExited="#r9Exit" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@imagens/usb.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="process0" fitHeight="50.0" fitWidth="50.0" layoutX="126.0" layoutY="68.0" onMouseDragged="#p0Drag" onMouseEntered="#p0Enter" onMouseExited="#p0Exit" onMousePressed="#p0Press" pickOnBounds="true" visible="false">
+               <image>
+                  <Image url="@imagens/photoshop.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="process1" fitHeight="50.0" fitWidth="50.0" layoutX="245.0" layoutY="53.0" onMouseEntered="#p1Enter" onMouseExited="#p1Exit" pickOnBounds="true" visible="false">
+               <image>
+                  <Image url="@imagens/illustrator.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="process2" fitHeight="52.0" fitWidth="52.0" layoutX="367.0" layoutY="47.0" onMouseEntered="#p2Enter" onMouseExited="#p2Exit" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@imagens/chrome.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="process3" fitHeight="50.0" fitWidth="50.0" layoutX="477.0" layoutY="55.0" onMouseEntered="#p3Enter" onMouseExited="#p3Exit" pickOnBounds="true" visible="false">
+               <image>
+                  <Image url="@imagens/dropbox.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="process4" fitHeight="48.0" fitWidth="48.0" layoutX="589.0" layoutY="71.0" onMouseEntered="#p4Enter" onMouseExited="#p4Exit" pickOnBounds="true" visible="false">
+               <image>
+                  <Image url="@imagens/adobe.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="process5" fitHeight="50.0" fitWidth="50.0" layoutX="130.0" layoutY="529.0" onMouseEntered="#p5Enter" onMouseExited="#p5Exit" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@imagens/steam.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="process6" fitHeight="50.0" fitWidth="50.0" layoutX="246.0" layoutY="540.0" onMouseEntered="#p6Enter" onMouseExited="#p6Exit" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@imagens/utorrent.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="process7" fitHeight="51.0" fitWidth="51.0" layoutX="368.0" layoutY="553.0" onMouseEntered="#p7Enter" onMouseExited="#p7Exit" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@imagens/NetBeans.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="process8" fitHeight="50.0" fitWidth="50.0" layoutX="480.0" layoutY="542.0" onMouseEntered="#p8Enter" onMouseExited="#p8Exit" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@imagens/spotify.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="process9" fitHeight="50.0" fitWidth="50.0" layoutX="585.0" layoutY="525.0" onMouseEntered="#p9Enter" onMouseExited="#p9Exit" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@imagens/word.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="process0Label" alignment="CENTER" layoutX="138.0" layoutY="45.0" prefHeight="20.0" prefWidth="28.0" text="-" visible="false">
+               <font>
+                  <Font name="Century Gothic" size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="process1Label" alignment="CENTER" layoutX="257.0" layoutY="29.0" prefHeight="20.0" prefWidth="28.0" text="-" visible="false">
+               <font>
+                  <Font name="Century Gothic" size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="process2Label" alignment="CENTER" layoutX="380.0" layoutY="24.0" prefHeight="20.0" prefWidth="28.0" text="-" visible="false">
+               <font>
+                  <Font name="Century Gothic" size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="process3Label" alignment="CENTER" layoutX="489.0" layoutY="31.0" prefHeight="20.0" prefWidth="28.0" text="-" visible="false">
+               <font>
+                  <Font name="Century Gothic" size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="process4Label" alignment="CENTER" layoutX="600.0" layoutY="47.0" prefHeight="20.0" prefWidth="28.0" text="-" visible="false">
+               <font>
+                  <Font name="Century Gothic" size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="process5Label" alignment="CENTER" layoutX="140.0" layoutY="584.0" prefHeight="20.0" prefWidth="28.0" text="-" visible="false">
+               <font>
+                  <Font name="Century Gothic" size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="process6Label" alignment="CENTER" layoutX="256.0" layoutY="595.0" prefHeight="20.0" prefWidth="28.0" text="-" visible="false">
+               <font>
+                  <Font name="Century Gothic" size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="process7Label" alignment="CENTER" layoutX="379.0" layoutY="608.0" prefHeight="20.0" prefWidth="28.0" text="-" visible="false">
+               <font>
+                  <Font name="Century Gothic" size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="process8Label" alignment="CENTER" layoutX="489.0" layoutY="597.0" prefHeight="20.0" prefWidth="28.0" text="-" visible="false">
+               <font>
+                  <Font name="Century Gothic" size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="process9Label" alignment="CENTER" layoutX="595.0" layoutY="579.0" prefHeight="20.0" prefWidth="28.0" text="-" visible="false">
+               <font>
+                  <Font name="Century Gothic" size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="resource8Label" alignment="CENTER" layoutX="33.0" layoutY="300.0" text="-" visible="false">
+               <font>
+                  <Font name="Century Gothic Bold Italic" size="15.0" />
+               </font>
+               <effect>
+                  <DropShadow color="WHITE" height="7.54" radius="2.8674999999999997" spread="0.63" width="5.93" />
+               </effect>
+            </Label>
+            <Label fx:id="resource6Label" alignment="CENTER" layoutX="107.0" layoutY="300.0" text="-" visible="false">
+               <font>
+                  <Font name="Century Gothic Bold Italic" size="15.0" />
+               </font>
+               <effect>
+                  <DropShadow color="WHITE" height="7.54" radius="2.8674999999999997" spread="0.63" width="5.93" />
+               </effect>
+            </Label>
+            <Label fx:id="resource4Label" alignment="CENTER" layoutX="178.0" layoutY="299.0" text="-" visible="false">
+               <font>
+                  <Font name="Century Gothic Bold Italic" size="15.0" />
+               </font>
+               <effect>
+                  <DropShadow color="WHITE" height="7.54" radius="2.8674999999999997" spread="0.63" width="5.93" />
+               </effect>
+            </Label>
+            <Label fx:id="resource2Label" alignment="CENTER" layoutX="251.0" layoutY="299.0" text="-" visible="false">
+               <font>
+                  <Font name="Century Gothic Bold Italic" size="15.0" />
+               </font>
+               <effect>
+                  <DropShadow color="WHITE" height="7.54" radius="2.8674999999999997" spread="0.63" width="5.93" />
+               </effect>
+            </Label>
+            <Label fx:id="resource0Label" alignment="CENTER" layoutX="320.0" layoutY="299.0" text="-" visible="false">
+               <font>
+                  <Font name="Century Gothic Bold Italic" size="15.0" />
+               </font>
+               <effect>
+                  <DropShadow color="WHITE" height="7.54" radius="2.8674999999999997" spread="0.63" width="5.93" />
+               </effect>
+            </Label>
+            <Label fx:id="resource1Label" alignment="CENTER" layoutX="393.0" layoutY="299.0" text="-" visible="false">
+               <font>
+                  <Font name="Century Gothic Bold Italic" size="15.0" />
+               </font>
+               <effect>
+                  <DropShadow color="WHITE" height="7.54" radius="2.8674999999999997" spread="0.63" width="5.93" />
+               </effect>
+            </Label>
+            <Label fx:id="resource3Label" alignment="CENTER" layoutX="464.0" layoutY="298.0" text="-" visible="false">
+               <font>
+                  <Font name="Century Gothic Bold Italic" size="15.0" />
+               </font>
+               <effect>
+                  <DropShadow color="WHITE" height="7.54" radius="2.8674999999999997" spread="0.63" width="5.93" />
+               </effect>
+            </Label>
+            <Label fx:id="resource5Label" alignment="CENTER" layoutX="538.0" layoutY="298.0" text="-" visible="false">
+               <font>
+                  <Font name="Century Gothic Bold Italic" size="15.0" />
+               </font>
+               <effect>
+                  <DropShadow color="WHITE" height="7.54" radius="2.8674999999999997" spread="0.63" width="5.93" />
+               </effect>
+            </Label>
+            <Label fx:id="resource7Label" alignment="CENTER" layoutX="608.0" layoutY="299.0" text="-" visible="false">
+               <font>
+                  <Font name="Century Gothic Bold Italic" size="15.0" />
+               </font>
+               <effect>
+                  <DropShadow color="WHITE" height="7.54" radius="2.8674999999999997" spread="0.63" width="5.93" />
+               </effect>
+            </Label>
+            <Label fx:id="resource9Label" alignment="CENTER" layoutX="682.0" layoutY="299.0" text="-" visible="false">
+               <font>
+                  <Font name="Century Gothic Bold Italic" size="15.0" />
+               </font>
+               <effect>
+                  <DropShadow color="WHITE" height="7.54" radius="2.8674999999999997" spread="0.63" width="5.93" />
+               </effect>
+            </Label>
+            <Pane fx:id="processInfo" layoutX="525.0" layoutY="408.0" prefHeight="114.0" prefWidth="174.0" style="-fx-background-color: rgba(225,225,225,0);" visible="false">
+               <children>
+                  <ImageView fx:id="backInfo" fitHeight="114.0" fitWidth="174.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@imagens/back-info.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="nameInfoP" contentDisplay="CENTER" layoutX="16.0" layoutY="30.0" prefHeight="19.0" prefWidth="94.0" text="Illustrator" textFill="#fcfcfc">
+                     <font>
+                        <Font name="Century Gothic Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="idInfoP" layoutX="141.0" layoutY="30.0" text="30" textFill="#fcfcfc">
+                     <font>
+                        <Font name="Century Gothic Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="116.0" layoutY="30.0" text="ID:" textFill="#d3d3d3">
+                     <font>
+                        <Font name="Century Gothic" size="15.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="25.0" layoutY="50.0" text="Δ Solicitação: " textFill="#d3d3d3">
+                     <font>
+                        <Font name="Century Gothic" size="15.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="36.0" layoutY="70.0" text="Δ Utilização: " textFill="#d3d3d3">
+                     <font>
+                        <Font name="Century Gothic" size="15.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="requestInfo" layoutX="130.0" layoutY="51.0" text="30" textFill="#e8e8e8">
+                     <font>
+                        <Font name="Century Gothic Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="useInfo" layoutX="130.0" layoutY="70.0" text="30" textFill="#e8e8e8">
+                     <font>
+                        <Font name="Century Gothic Bold" size="15.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane fx:id="resourceInfo" layoutX="18.0" layoutY="246.0" prefHeight="54.0" prefWidth="174.0" style="-fx-background-color: rgba(0,0,0,0);" visible="false">
+               <children>
+                  <ImageView fx:id="backInfo1" fitHeight="114.0" fitWidth="174.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@imagens/back-info-2.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="nameInfoR" contentDisplay="CENTER" layoutX="16.0" layoutY="13.0" prefHeight="19.0" prefWidth="94.0" text="Illustrator" textFill="#fcfcfc">
+                     <font>
+                        <Font name="Century Gothic Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="idInfoR" layoutX="141.0" layoutY="13.0" text="30" textFill="#fcfcfc">
+                     <font>
+                        <Font name="Century Gothic Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="117.0" layoutY="13.0" text="ID:" textFill="#d3d3d3">
+                     <font>
+                        <Font name="Century Gothic" size="15.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane fx:id="resourceInfoLeft" layoutX="26.0" layoutY="246.0" prefHeight="54.0" prefWidth="174.0" style="-fx-background-color: rgba(0,0,0,0);" visible="false">
+               <children>
+                  <ImageView fitHeight="114.0" fitWidth="174.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@imagens/back-info-left.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="nameInfoLeft" contentDisplay="CENTER" layoutX="16.0" layoutY="13.0" prefHeight="19.0" prefWidth="94.0" text="Illustrator" textFill="#fcfcfc">
+                     <font>
+                        <Font name="Century Gothic Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="152.0" layoutY="13.0" text="8" textFill="#fcfcfc">
+                     <font>
+                        <Font name="Century Gothic Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="128.0" layoutY="13.0" text="ID:" textFill="#d3d3d3">
+                     <font>
+                        <Font name="Century Gothic" size="15.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane fx:id="resourceInfoRight" layoutX="571.0" layoutY="246.0" prefHeight="54.0" prefWidth="174.0" style="-fx-background-color: rgba(0,0,0,0);" visible="false">
+               <children>
+                  <ImageView fitHeight="114.0" fitWidth="174.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@imagens/back-info-right.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="nameInfoRight" contentDisplay="CENTER" layoutX="16.0" layoutY="13.0" prefHeight="19.0" prefWidth="94.0" text="Illustrator" textFill="#fcfcfc">
+                     <font>
+                        <Font name="Century Gothic Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="152.0" layoutY="13.0" text="9" textFill="#fcfcfc">
+                     <font>
+                        <Font name="Century Gothic Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="128.0" layoutY="13.0" text="ID:" textFill="#d3d3d3">
+                     <font>
+                        <Font name="Century Gothic" size="15.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+         </children>
+      </Pane>
+      <Pane prefHeight="38.0" prefWidth="1200.0">
+         <children>
+            <ImageView fx:id="topBar" fitHeight="38.0" fitWidth="1200.0" onMouseDragged="#moveScreen" onMousePressed="#topBarPress" pickOnBounds="true">
+               <image>
+                  <Image url="@imagens/topbar.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="minimize" fitHeight="25.0" fitWidth="25.0" layoutX="1135.0" layoutY="7.0" onMouseClicked="#minimizeWindow" onMouseEntered="#minimizeWindowIn" onMouseExited="#minimizeWindowOut" pickOnBounds="true">
+               <image>
+                  <Image url="@imagens/minimize-window.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="close" fitHeight="25.0" fitWidth="25.0" layoutX="1168.0" layoutY="7.0" onMouseClicked="#closeWindow" onMouseEntered="#closeWindowIn" onMouseExited="#closeWindowOut" pickOnBounds="true">
+               <image>
+                  <Image url="@imagens/close-window.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
